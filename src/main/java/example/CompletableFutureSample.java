@@ -24,7 +24,7 @@ public class CompletableFutureSample {
     // supplyAsync
     // thenApply, thenAcceptにAsyncなし
     log.info("cf supplyAsync - thenApply - thenAccept");
-    CompletableFuture<Void> cfNoAsync = CompletableFuture.supplyAsync(task::supplyTask)
+    CompletableFuture<Void> cfNoAsync = CompletableFuture.supplyAsync(task::supplyTask, fixedThreadExecutorService)
         .thenApply(task::functionTask)
         .thenAccept(task::consumeTask);
     cfNoAsync.join();
@@ -33,7 +33,7 @@ public class CompletableFutureSample {
     // supplyAsync
     // thenApply, thenAcceptにAsyncあり
     log.info("cf supplyAsync - thenApplyAsync - thenAcceptAsync");
-    CompletableFuture<Void> cfAsync = CompletableFuture.supplyAsync(task::supplyTask)
+    CompletableFuture<Void> cfAsync = CompletableFuture.supplyAsync(task::supplyTask, fixedThreadExecutorService)
         .thenApplyAsync(task::functionTask)
         .thenAcceptAsync(task::consumeTask);
     cfAsync.join();
